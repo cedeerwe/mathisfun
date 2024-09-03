@@ -120,39 +120,6 @@ export const DiceFightTable: React.FC<{ dice: Die[]; gameId: string }> = ({
       <DataGrid columns={columns} rows={rows} disableColumnFilter hideFooter />
     </Box>
   );
-
-  //   return (
-  //     <Table>
-  //       <TableHead>
-  //         <TableRow>
-  //           <TableCell>Name</TableCell>
-  //           <TableCell>Values</TableCell>
-  //           {dice.map(({ name, id }) => (
-  //             <TableCell key={id}>{name}</TableCell>
-  //           ))}
-  //         </TableRow>
-  //       </TableHead>
-  //       <TableBody>
-  //         {dice.map(({ name, values, id }) => (
-  //           <TableRow key={id}>
-  //             <TableCell>{name}</TableCell>
-  //             <TableCell>{values.join(",")}</TableCell>
-  //             {dice.map(({ values: opponentValues, id: opponentId }) => {
-  //               const winProb = winScore(values, opponentValues);
-  //               return (
-  //                 <TableCell
-  //                   key={opponentId}
-  //                   sx={{ backgroundColor: rdBuScale(winProb) }}
-  //                 >
-  //                   {(winProb * 100).toFixed(2)}%
-  //                 </TableCell>
-  //               );
-  //             })}
-  //           </TableRow>
-  //         ))}
-  //       </TableBody>
-  //     </Table>
-  //   );
 };
 
 function winScore(

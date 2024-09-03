@@ -28,19 +28,19 @@ export function binomial(n: number, k: number): number {
 }
 
 export function winProbMatch(x: number, goal: number): number {
-  let result = 0;
-  const stack = [{ prob: 1, m: 0, n: 0 }];
-  while (stack.length > 0) {
-    const { prob, m, n } = stack.pop()!;
-    if (m >= goal) {
-      result += prob;
-      continue;
-    }
-    if (n >= goal) {
-      continue;
-    }
-    stack.push({ prob: prob * x, m: m + 1, n });
-    stack.push({ prob: prob * (1 - x), m, n: n + 1 });
+  const hash = (m: number, n: number) => `${m}-${n}`;
+  const cache = new Map();
+  // We set the corner probabilities of winning. These will be used to compute all the others
+  for (let n = 0; n < goal; n++) {
+    cache.set(hash(goal, n), 1);
+    cache.set(hash(n, goal), 0);
   }
-  return result;
+  for (let m = goal - 1; m >= 0; m--) {
+    for (let n = goal - 1; n >= 0; n--) {
+      const prob =
+        cache.get(hash(m + 1, n)) * x + cache.get(hash(m, n + 1)) * (1 - x);
+      cache.set(hash(m, n), prob);
+    }
+  }
+  return cache.get(hash(0, 0));
 }
