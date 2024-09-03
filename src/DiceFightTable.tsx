@@ -72,8 +72,8 @@ export const DiceFightTable: React.FC<{ dice: Die[]; gameId: string }> = ({
     Object.values(diceResults).reduce((a, b) => a + b, 0)
   );
 
-  const minResult = allDiceResults.reduce((a, b) => Math.min(a, b));
-  const maxResult = allDiceResults.reduce((a, b) => Math.max(a, b));
+  const minResult = allDiceResults.reduce((a, b) => Math.min(a, b), 0);
+  const maxResult = allDiceResults.reduce((a, b) => Math.max(a, b), 0);
 
   const rows = dice.map((d) => ({
     id: d.id,
